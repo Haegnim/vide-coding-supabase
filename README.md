@@ -1,5 +1,29 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Supabase 설정
+
+이 프로젝트는 Supabase를 백엔드로 사용합니다. 시작하기 전에 환경 변수를 설정해야 합니다.
+
+1. 프로젝트 루트에 `.env.local` 파일을 생성하세요:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+2. Supabase 프로젝트에서 다음 테이블을 생성하세요:
+
+**magazine 테이블:**
+
+- `id` (uuid, primary key, default: uuid_generate_v4())
+- `image_url` (text, nullable)
+- `category` (text, required)
+- `title` (text, required)
+- `description` (text, required)
+- `content` (text, required)
+- `tags` (text[], nullable)
+- `created_at` (timestamp, default: now())
+
 ## Getting Started
 
 First, run the development server:
