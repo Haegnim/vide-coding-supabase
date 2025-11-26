@@ -28,17 +28,17 @@ export const useSubmitMagazine = () => {
         // 파일명 생성: yyyy/mm/dd/{UUID}.jpg
         const now = new Date();
         const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
         const uuid = crypto.randomUUID();
-        
+
         // 파일 확장자 추출
-        const fileExtension = data.imageFile.name.split('.').pop() || 'jpg';
+        const fileExtension = data.imageFile.name.split(".").pop() || "jpg";
         const fileName = `${year}/${month}/${day}/${uuid}.${fileExtension}`;
-        
+
         // Supabase Storage에 파일 업로드
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('vibe-coding-supabase-storage')
+        const { error: uploadError } = await supabase.storage
+          .from("vibe-coding-supabase-storage")
           .upload(fileName, data.imageFile);
 
         if (uploadError) {
@@ -47,9 +47,9 @@ export const useSubmitMagazine = () => {
 
         // 업로드된 파일의 public URL 생성
         const { data: urlData } = supabase.storage
-          .from('vibe-coding-supabase-storage')
+          .from("vibe-coding-supabase-storage")
           .getPublicUrl(fileName);
-        
+
         imageUrl = urlData.publicUrl;
       }
 
@@ -104,7 +104,3 @@ export const useSubmitMagazine = () => {
     error,
   };
 };
-
-
-
-
