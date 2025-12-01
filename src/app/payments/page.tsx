@@ -2,17 +2,14 @@
 
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { usePaymentHook } from "./hooks/index.payment.hook";
 
 export default function GlossaryPayments() {
   const router = useRouter();
+  const { isLoading, error, handleSubscribe } = usePaymentHook();
 
   const handleNavigateToList = () => {
     router.push('/magazines');
-  };
-
-  const handleSubscribe = () => {
-    alert('구독이 완료되었습니다!');
-    handleNavigateToList();
   };
 
   return (
@@ -68,11 +65,18 @@ export default function GlossaryPayments() {
               </div>
             </div>
 
+            {error && (
+              <div className="payment-error-message">
+                {error}
+              </div>
+            )}
+
             <button 
               className="payment-subscribe-button"
               onClick={handleSubscribe}
+              disabled={isLoading}
             >
-              구독하기
+              {isLoading ? '처리 중...' : '구독하기'}
             </button>
           </div>
         </div>
