@@ -23,7 +23,7 @@ const mockUserData: UserProfile = {
   transactionKey: "test_transaction_key_001", // 구독 조회 구현 전까지 하드코딩 사용
 };
 
-export function GlossaryMagazinesMypage() {
+function GlossaryMagazinesMypage() {
   const router = useRouter();
   const [user, setUser] = useState<UserProfile>(mockUserData);
   const { cancelSubscription, isLoading } = usePaymentCancel();
